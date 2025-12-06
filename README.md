@@ -38,4 +38,4 @@ npm run lint
 
 ## License
 
-Copyright © 2024 Sangraha LLC. All rights reserved.
+Copyright © 2025 Sangraha LLC. All rights reserved.
