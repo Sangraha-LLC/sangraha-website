@@ -134,7 +134,7 @@ function App() {
             Sangraha LLC can help enhance your online presence.
           </p>
           <div className="contact-info">
-            <a href="mailto:info@sangraha.com" className="contact-button">
+            <a href="mailto:aayog@sangraha.art" className="contact-button">
               Contact Us
             </a>
           </div>
