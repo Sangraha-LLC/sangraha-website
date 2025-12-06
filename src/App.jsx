@@ -144,7 +144,7 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2024 Sangraha LLC. All rights reserved.</p>
+          <p>&copy; 2025 Sangraha LLC. All rights reserved.</p>
           <p className="footer-tagline">
             Empowering photographers and artists with AI-driven portfolio solutions
           </p>
