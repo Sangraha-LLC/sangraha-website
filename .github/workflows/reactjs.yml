@@ -1,18 +1,58 @@
-name: Build and Deploy
+name: Deploy Vite React App to Pages
 
 on:
+  # Runs on pushes to the default branch (e.g., "main")
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions required for deployment actions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
+  # 1. Build job: Installs dependencies, builds the app, and uploads the artifact
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Build and Deploy React app to GitHub Pages
-      uses: omkartapale/react-deployment-gh-pages@v1.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a recent LTS version
+          cache: 'npm' # Use npm caching
+
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build project
+        # This runs the 'vite build' command, which creates the /dist folder
+        run: npm run build 
+
+      - name: Setup Pages
+        # Configure GitHub Pages environment
+        uses: actions/configure-pages@v5
+
+      - name: Upload production artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The path must match the output directory of Vite's build command
+          path: './dist' 
+
+  # 2. Deploy job: Uses the uploaded artifact to deploy to GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    # This job depends on the 'build' job completing successfully
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
