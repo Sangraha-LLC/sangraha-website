@@ -6,7 +6,7 @@ function App() {
       {/* Header/Navigation */}
       <header className="header">
         <div className="container">
-          <h1 className="logo">Sangraha LLC</h1>
+          <h1 className="logo">Sangraha</h1>
           <nav className="nav">
             <a href="#services">Services</a>
             <a href="#features">Features</a>
